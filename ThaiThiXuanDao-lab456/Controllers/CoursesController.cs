@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -27,6 +28,18 @@ namespace ThaiThiXuanDao_lab456.Controllers
             };
             return View(viewModel);
         }
-       
+        public ActionResult Create(CourseViewModel viewModel)
+        {
+            var course = new Course
+            {
+                LecttureId = User.Identity.GetUserId(),
+                DateTime = viewModel.GetDateTime(),
+                CategoryId = viewModel.Category,
+                Place = viewModel.Place
+            };
+            _dbContext.Courses.Add(course);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }      
     }
 }
