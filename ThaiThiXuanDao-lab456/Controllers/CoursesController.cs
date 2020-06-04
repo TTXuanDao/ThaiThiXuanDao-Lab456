@@ -28,6 +28,8 @@ namespace ThaiThiXuanDao_lab456.Controllers
             };
             return View(viewModel);
         }
+        [Authorize]
+        [HttpPost]
         public ActionResult Create(CourseViewModel viewModel)
         {
             var course = new Course
